@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="ar" dir="rtl"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>مخبر الأمن الكهربائي – السنة الرابعة متوسط</title>
+<style>
+:root{--bg:#f4f6fa;--card:#fff;--tx:#1b2330;--mut:#5b6678;--bd:#d9dfe9;--ac:#1a56db;--live:#d93025;--neu:#1a73e8;--ok:#188038;--warn:#b06000;--okbg:#e6f4ea;--badbg:#fce8e6;--wbg:#fef7e0;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#10151d;--card:#1a212c;--tx:#e8edf5;--mut:#9aa6b8;--bd:#2d3746;--ac:#6ea0ff;--live:#ff6b5e;--neu:#6aa8ff;--ok:#5fd07f;--warn:#f0b24a;--okbg:#14301d;--badbg:#3a1a18;--wbg:#33280f}}
+:root[data-theme="dark"]{--bg:#10151d;--card:#1a212c;--tx:#e8edf5;--mut:#9aa6b8;--bd:#2d3746;--ac:#6ea0ff;--live:#ff6b5e;--neu:#6aa8ff;--ok:#5fd07f;--warn:#f0b24a;--okbg:#14301d;--badbg:#3a1a18;--wbg:#33280f}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:Tajawal,Tahoma,Arial,sans-serif;line-height:1.7}
+header{padding:18px 16px 6px;max-width:920px;margin:auto}
+h1{margin:0;font-size:1.5rem}header p{margin:4px 0 0;color:var(--mut)}
+nav{display:flex;gap:6px;overflow-x:auto;padding:10px 16px;max-width:920px;margin:auto}
+nav button{flex:none;font:inherit;border:1px solid var(--bd);background:var(--card);color:var(--tx);padding:8px 14px;border-radius:999px;cursor:pointer}
+nav button.on{background:var(--ac);color:#fff;border-color:var(--ac)}
+main{max-width:920px;margin:auto;padding:0 16px 40px}
+section{display:none;background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:16px}
+section.on{display:block}
+h2{margin:0 0 4px;font-size:1.2rem}.sub{color:var(--mut);margin:0 0 12px}
+.row{display:flex;gap:16px;flex-wrap:wrap;align-items:flex-start}
+.row>div{flex:1 1 300px;min-width:0}
+svg{width:100%;height:auto;max-height:340px}
+.btn{font:inherit;border:1px solid var(--bd);background:var(--bg);color:var(--tx);padding:7px 13px;border-radius:10px;cursor:pointer;margin:3px 0 3px 6px}
+.btn.on{background:var(--ac);color:#fff;border-color:var(--ac)}
+.msg{border-radius:12px;padding:10px 12px;margin-top:10px;background:var(--wbg);border:1px solid var(--bd)}
+.msg.ok{background:var(--okbg)}.msg.bad{background:var(--badbg)}
+.meter{height:16px;border-radius:8px;background:var(--bg);border:1px solid var(--bd);overflow:hidden}
+.meter i{display:block;height:100%;width:0;background:var(--ok);transition:width .2s}
+.dig{font-family:monospace;font-size:2rem;background:#0b1f0e;color:#7dff8a;border-radius:10px;padding:6px 16px;display:inline-block;direction:ltr;min-width:140px;text-align:center}
+.lamp{width:34px;height:34px;border-radius:50%;border:2px solid var(--bd);display:inline-block;vertical-align:middle;background:var(--bg)}
+.lamp.on{background:#ffd43b;box-shadow:0 0 18px 6px #ffd43b99}
+select{font:inherit;background:var(--bg);color:var(--tx);border:1px solid var(--bd);border-radius:8px;padding:4px}
+.h{cursor:pointer}.warnbar{margin-top:16px;font-size:.9rem;color:var(--mut);text-align:center}
+label{display:block;margin:4px 0}
+.bar{display:flex;flex-wrap:wrap;gap:6px}.bar .btn{margin:0}
+.grp{margin:0 0 14px}.grp>b{display:block;font-size:.85rem;color:var(--mut);margin-bottom:6px}
+.ctl{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:2px 22px;margin-top:12px}
+svg.w{max-height:400px}.msg{transition:filter .25s}
+.bl .msg:not(.show):not(#i1){filter:blur(7px);cursor:pointer;user-select:none}
+.msg:empty{display:none}
+.touch{font:inherit;font-size:1.2rem;font-weight:700;color:#fff;border:0;border-radius:14px;padding:12px 34px;cursor:pointer;background:linear-gradient(135deg,#ff8a3d,#e5322d);box-shadow:0 4px 0 #a82320,0 8px 16px #0003;transition:transform .08s,box-shadow .08s}
+.touch:active{transform:translateY(3px);box-shadow:0 1px 0 #a82320,0 3px 8px #0003}
+@keyframes shk{0%,100%{transform:translateX(-3px)}50%{transform:translateX(3px)}}.shk{animation:shk .15s infinite}
+section>h2{display:flex;justify-content:space-between;align-items:center;gap:8px}.rs{font-size:.85rem;flex:none}
+</style></head><body>
+<svg width="0" height="0" style="position:absolute"><defs><pattern id="ge" width="12" height="12" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="6" height="12" fill="#2e9e44"/><rect x="6" width="6" height="12" fill="#f4d03f"/></pattern></defs></svg>
+<header><h1>⚡ مخبر الأمن الكهربائي</h1><p>محاكاة تفاعلية – السنة الرابعة متوسط. جرّب بنفسك ولاحظ ثم استنتج.</p><div class="bar" style="margin-top:8px"><button class="btn" id="blb" onclick="blurNotes()" title="انقر على الملاحظة المموّهة لإظهارها">🙈 تمويه الملاحظات</button></div></header>
+<nav id="nav"></nav>
+<main>
+
+<section id="s1"><h2>1) مرابط المأخذ وألوان الأسلاك</h2><p class="sub">انقر على كل مربط لتعرف دوره ورمزه ولون سلكه.</p>
+<svg class="w" viewBox="0 0 560 262" id="svg1"></svg>
+<div class="bar" style="margin:8px 0"><button class="btn" onclick="rev=!rev;paint1()">🎨 كشف / إخفاء ألوان الأسلاك</button></div>
+<div class="msg" id="i1">اختر مربطاً من أحد المأخذين.</div></section>
+
+<section id="s2"><h2>2) الكشف عن مرابط المأخذ</h2><p class="sub">موضع الطور يتغير من مأخذ لآخر. اكتشفه بالمفك الكاشف أو بالفولطمتر.</p>
+<svg class="w" viewBox="0 0 520 340" id="svg2">
+<g id="mm" style="display:none">
+<rect x="10" y="14" width="160" height="318" rx="16" fill="#f5b700" stroke="#2b2f36" stroke-width="3"/>
+<rect x="26" y="30" width="128" height="62" rx="6" fill="#bfd6ad" stroke="#2b2f36" stroke-width="2"/>
+<text x="40" y="46" text-anchor="middle" font-size="10" fill="#102010">AC</text><text x="140" y="46" text-anchor="middle" font-size="11" font-weight="700" fill="#102010">V~</text>
+<text id="dg" x="90" y="80" text-anchor="middle" font-family="monospace" font-size="30" font-weight="700" fill="#102010" style="direction:ltr;unicode-bidi:embed">---</text>
+<circle cx="90" cy="170" r="44" fill="#2b2f36"/><line x1="90" y1="170" x2="90" y2="134" stroke="#fff" stroke-width="4" stroke-linecap="round"/><circle cx="90" cy="170" r="8" fill="#555"/>
+<text x="90" y="124" text-anchor="middle" font-size="12" font-weight="700" fill="#222">V~</text><text x="36" y="174" text-anchor="middle" font-size="11" fill="#222">V=</text><text x="144" y="174" text-anchor="middle" font-size="11" fill="#222">A</text><text x="90" y="232" text-anchor="middle" font-size="12" fill="#222">Ω</text>
+<circle cx="45" cy="292" r="11" fill="#111" stroke="#fff" stroke-width="2"/><text x="45" y="320" text-anchor="middle" font-size="10" fill="#222">COM</text>
+<circle cx="135" cy="292" r="11" fill="#d93025" stroke="#fff" stroke-width="2"/><text x="135" y="320" text-anchor="middle" font-size="10" fill="#222">V</text>
+</g>
+<g transform="translate(180,0)"><rect x="80" y="100" width="220" height="170" rx="22" fill="var(--bg)" stroke="var(--bd)" stroke-width="3"/>
+<g class="h" onclick="click2(0)"><circle id="h2_0" cx="140" cy="190" r="17" fill="#222" stroke="var(--bd)" stroke-width="3"/></g>
+<g class="h" onclick="click2(1)"><circle id="h2_1" cx="240" cy="190" r="17" fill="#222" stroke="var(--bd)" stroke-width="3"/></g>
+<g class="h" onclick="click2(2)"><circle cx="190" cy="130" r="14" fill="var(--card)" stroke="var(--bd)" stroke-width="2"/><circle id="h2_2" cx="190" cy="130" r="7" fill="#c9ced6" stroke="var(--bd)" stroke-width="3"/></g></g>
+<g style="pointer-events:none"><path id="lo0" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="7" stroke-linecap="round"/><path id="ld0" fill="none" stroke="#d93025" stroke-width="4" stroke-linecap="round"/><circle id="lt0" r="7" fill="#d93025" stroke="#fff" stroke-width="2" style="display:none"/>
+<path id="lo1" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="7" stroke-linecap="round"/><path id="ld1" fill="none" stroke="#111" stroke-width="4" stroke-linecap="round"/><circle id="lt1" r="7" fill="#111" stroke="#fff" stroke-width="2" style="display:none"/></g>
+<g id="sd" style="transform-origin:0 0;transition:transform .55s ease,opacity .3s;opacity:0;pointer-events:none">
+<path d="M-5 -16L0 0L5 -16Z" fill="#9aa3b0"/><rect x="-3" y="-72" width="6" height="58" fill="#aeb6c2"/>
+<rect x="-12" y="-152" width="24" height="84" rx="10" fill="#3b82c4" stroke="#1d3b5a" stroke-width="1.5"/>
+<circle id="gl" cx="0" cy="-119" r="24" fill="#ffb300" style="opacity:0;transition:opacity .25s"/>
+<rect x="-6" y="-132" width="12" height="26" rx="6" fill="#e9eef5" stroke="#1d3b5a"/><ellipse id="sdl" cx="0" cy="-119" rx="4" ry="9" fill="#2a2a2a"/>
+<rect x="-8" y="-162" width="16" height="10" rx="2" fill="#c9ced6" stroke="#333"/>
+<ellipse id="fgr" cx="0" cy="-172" rx="14" ry="9" fill="#f0c8a4" stroke="#b98f6a" style="opacity:0;transition:opacity .3s"/></g></svg>
+<div class="grp"><b>الأداة</b><div class="bar"><button class="btn on" id="bt" onclick="tool2('t')">المفك الكاشف</button><button class="btn" id="bv" onclick="tool2('v')">الفولطمتر (AC)</button><button class="btn" onclick="new2()">🔀 مأخذ جديد عشوائي</button></div></div>
+<div id="p2t" class="grp"><label><input type="checkbox" id="fg" onchange="fin()"> أضع إصبعي على الطرف المعدني العلوي للمفك</label></div>
+<div id="p2v" class="grp" style="display:none"><div class="sub" style="margin:0">انقر على مربطين متتاليين: الأول للمسبار الأحمر والثاني للمسبار الأسود.</div></div>
+<div class="msg" id="m2"></div></section>
+
+<section id="s3"><h2>3) دور القاطعة: على الطور أم على الحيادي؟</h2><p class="sub">الأحمر = نقطة مرتبطة بالطور (خطر)، الأزرق = الحيادي، الرمادي = غير موصولة بالمنبع.</p>
+<div class="row"><div><svg viewBox="0 0 360 322" id="svg3"></svg></div><div>
+<div>موضع القاطعة:</div>
+<button class="btn on" id="m3p" onclick="mode=1;render3()">على الطور </button><button class="btn" id="m3n" onclick="mode=0;render3()">على الحيادي </button>
+<div style="margin-top:8px"><button class="btn" onclick="closed=!closed;render3()" id="sw3">القاطعة: مفتوحة</button></div>
+<div style="margin:14px 0 4px"><button class="touch" onclick="touch3()">✋ ألمس</button></div>
+<div class="msg" id="m3"></div></div></div></section>
+
+<section id="s4"><h2>4) دور التوصيل الأرضي</h2><p class="sub">غسالة هيكلها معدني. اختر الحالات وانظر إلى توتر الهيكل.</p>
+<div class="row"><div><svg viewBox="0 0 440 256" id="svg4"></svg></div><div>
+<label><input type="checkbox" id="c4f" onchange="render4()"> حدث عطب في العزل (الطور يمس الهيكل)</label>
+<label><input type="checkbox" id="c4e" onchange="render4()"> الهيكل موصول بالأرض</label>
+<label><input type="checkbox" id="c4p" onchange="render4()"> شخص يلمس الهيكل</label>
+<div><span class="dig" id="v4">0 V</span></div>
+<div class="msg" id="m4"></div></div></div></section>
+
+<section id="s5"><h2>5) دور المنصهرة</h2><p class="sub">اختر جهازاً ومنصهرة، ثم شغّل الجهاز وراقب: هل المنصهرة مناسبة؟</p>
+<div class="row"><div><svg viewBox="0 0 360 305" id="svg5"></svg></div><div>
+<div class="grp"><b>1. الجهاز</b><div class="bar" id="ap5"></div></div>
+<div class="grp"><b>2. عيار المنصهرة</b><div class="bar" id="fr5"></div></div>
+<div class="grp"><b>عرض القيم</b><div class="bar"><button class="btn" id="mi5" onclick="mode5(false)">الشدة I (A)</button><button class="btn" id="mp5" onclick="mode5(true)">الاستطاعة P والتوتر U</button></div><div class="sub" style="margin:6px 0 0">القانون: I = P ÷ U</div></div>
+<div class="grp"><b>3. التجربة</b><div class="bar"><button class="btn on" id="rb5" onclick="run5()">▶ تشغيل الجهاز</button><button class="btn" onclick="surge5()">⚡ ارتفاع مفاجئ في التيار</button><button class="btn" onclick="reset5()">🔧 استبدال المنصهرة</button></div><div class="sub" id="inf5" style="margin:8px 0 0"></div></div>
+<div class="msg" id="m5"></div></div></div></section>
+
+<section id="s6"><h2>6) الحمولة الزائدة والقاطع التفاضلي</h2><p class="sub">ثلاثة أجهزة على التفرع. يفصل القاطع الدارة إذا تجاوز مجموع الشدات الشدة التي يتحملها. انقر على الجهاز في الرسم أو على أزراره.</p>
+<svg class="w" viewBox="0 0 480 335" id="svg6"></svg>
+<div class="ctl">
+<div class="grp"><b>الأجهزة</b><div class="bar" id="ap6"></div><div class="bar" style="margin-top:6px"><button class="btn" id="cb6" onclick="chg6()">🔄 تغيير الأجهزة</button></div></div>
+<div class="grp"><b>عيار القاطع التفاضلي</b><div class="bar" id="br6"></div><div class="bar" style="margin-top:6px"><button class="btn" onclick="rearm6()">🔁 تمرير التيار</button></div></div>
+<div class="grp"><b>عرض القيم</b><div class="bar"><button class="btn" id="mi6" onclick="pu=false;render6()">الشدة I (A)</button><button class="btn" id="mp6" onclick="pu=true;render6()">الاستطاعة P والتوتر U</button></div><div class="sub" style="margin:6px 0 0">القانون: I = P ÷ U</div></div>
+<div class="grp"><b>المجموع في الدارة الرئيسية</b><div id="t6" style="font-weight:700;margin-bottom:4px"></div><div class="meter" id="mw6" style="position:relative"><i id="mt6"></i><b id="mk6" style="position:absolute;top:0;bottom:0;width:3px;background:var(--tx)"></b></div></div>
+</div><div class="msg" id="m6"></div></section>
+
+<section id="s7"><h2>7) الدارة المستقصرة</h2><p class="sub">دارة فيها قاطع تفاضلي ومأخذ. اربط خطاً بين الطور والحيادي وراقب ما يحدث للقاطع.</p>
+<svg class="w" viewBox="0 0 480 270" id="svg7"></svg>
+<div class="grp"><b>التجربة</b><div class="bar"><button class="btn on" id="sh7" onclick="short7()"></button><button class="btn" onclick="rearm7()">🔁 تمرير التيار</button></div></div>
+<div class="msg" id="m7"></div></section>
+
+</main>
+<script>
+const $=id=>document.getElementById(id);
+const TABS=['المرابط والألوان','الكشف عن الطور','القاطعة','التوصيل الأرضي','المنصهرة','الحمولة الزائدة','الدارة المستقصرة'];
+TABS.forEach((t,i)=>{const b=document.createElement('button');b.textContent=(i+1)+'. '+t;b.onclick=()=>go(i);$('nav').appendChild(b)});
+function go(i){document.querySelectorAll('nav button').forEach((b,j)=>b.classList.toggle('on',i==j));for(let j=1;j<=7;j++)$('s'+j).classList.toggle('on',j==i+1)}
+go(0);
+function msg(id,t,c){const e=$(id);e.className='msg '+(c||'');e.innerHTML=t}
+const C={L:'var(--live)',N:'var(--neu)',E:'url(#ge)'};
+
+/* ---- 1 ---- */
+const I1={L:['الطور Ph (Phase)','أحمر (أو بني)','يوصل التيار من المنبع إلى الجهاز. توتره 220 V بالنسبة للأرض: خطير جداً.','Ph'],N:['الحيادي N (Neutral)','أزرق','يعيد التيار إلى المنبع. توتره قريب من 0 V.','N'],E:['الأرضي T (Terre)','أخضر وأصفر','يربط هيكل الجهاز بالأرض لحماية الأشخاص. لا يمر فيه تيار في الحالة العادية.','T']};
+let rev=false;
+function sk1(cx,earth,sf){let t=`<rect x="${cx-110}" y="10" width="220" height="150" rx="22" fill="var(--bg)" stroke="var(--bd)" stroke-width="3"/>`;
+ t+=`<rect id="w1N${sf}" x="${cx-55}" y="158" width="10" height="80" rx="4" fill="#8a8f98"/><rect id="w1L${sf}" x="${cx+45}" y="158" width="10" height="80" rx="4" fill="#8a8f98"/>`;
+ if(earth)t+=`<rect id="w1E" x="${cx-5}" y="150" width="10" height="88" rx="4" fill="#8a8f98"/>`;
+ t+=`<g class="h" onclick="sel1('N')"><circle id="h1N${sf}" cx="${cx-50}" cy="85" r="15" fill="#222" stroke="var(--ac)" stroke-width="1.5"/></g><g class="h" onclick="sel1('L')"><circle id="h1L${sf}" cx="${cx+50}" cy="85" r="15" fill="#222" stroke="var(--ac)" stroke-width="1.5"/></g>`;
+ if(earth)t+=`<g class="h" onclick="sel1('E')"><circle cx="${cx}" cy="38" r="14" fill="var(--card)" stroke="var(--bd)" stroke-width="2"/><circle id="h1E" cx="${cx}" cy="38" r="7" fill="#c9ced6" stroke="var(--ac)" stroke-width="1.5"/></g>`;
+ return t+`<text x="${cx}" y="256" text-anchor="middle" font-size="12" fill="var(--mut)">${earth?'مأخذ بقطب أرضي (T)':'مأخذ بدون قطب أرضي'}</text>`}
+$('svg1').innerHTML=sk1(145,true,'')+sk1(415,false,'b');
+function paint1(){['L','N','E'].forEach(k=>['','b'].forEach(sf=>{const e=$('w1'+k+sf);if(e)e.style.fill=rev?C[k]:'#8a8f98'}))}
+function sel1(k){['L','N','E'].forEach(x=>['','b'].forEach(sf=>{const e=$('h1'+x+sf);if(e)e.setAttribute('stroke-width',x==k?5:1.5)}));const d=I1[k];msg('i1','<b>'+d[0]+'</b><br>الرمز: <b>'+d[3]+'</b><br>لون السلك: <b>'+d[1]+'</b><br>'+d[2],k=='L'?'bad':k=='E'?'ok':'')}
+
+/* ---- 2 ---- */
+const P2=[[320,190],[420,190],[370,130]],PORT=[[135,292],[45,292]];
+let ph=0,tl='t',pa=null,pb=null,tok=0;
+const role=i=>i==2?'E':i==ph?'L':'N';
+function rings(){[0,1,2].forEach(j=>$('h2_'+j).setAttribute('stroke',j===pa?(tl=='v'?'#ff5b4d':'#f59f00'):j===pb?'#e9edf3':'var(--bd)'))}
+function leads(){[pa,pb].forEach((i,k)=>{const on=tl=='v'&&i!==null;let d='';if(on){const[px,py]=PORT[k],[tx,ty]=P2[i];d='M'+px+' '+py+'C'+(px+20)+' '+(py+30)+' '+(tx-70)+' '+(ty+90)+' '+tx+' '+ty}
+ $('ld'+k).setAttribute('d',d);$('lo'+k).setAttribute('d',d);const c=$('lt'+k);c.style.display=on?'':'none';if(on){c.setAttribute('cx',P2[i][0]);c.setAttribute('cy',P2[i][1])}})}
+function sd(i){const g=$('sd');if(i===null){g.style.opacity=0;g.style.transform='translate(500px,170px) rotate(25deg) scale(.7)'}else{g.style.opacity=1;g.style.transform='translate('+P2[i][0]+'px,'+P2[i][1]+'px) rotate(25deg) scale(.7)'}}
+function lampState(o){$('sdl').setAttribute('fill',o?'#ffb300':'#2a2a2a');$('gl').style.opacity=o?.5:0}
+function fin(){$('fgr').style.opacity=$('fg').checked?1:0;if(tl=='t'&&pa!==null)evalT()}
+function evalT(){const f=$('fg').checked,L=role(pa)=='L';lampState(f&&L);
+ msg('m2',!f?'لم تضع إصبعك على الطرف المعدني العلوي: الدارة غير مغلقة، فلا يضيء الصمام مهما كان المربط!':L?'💡 الصمام مضاء: هذا المربط هو <b>الطور</b>.':'الصمام مطفأ: هذا المربط ليس الطور.',!f?'warn':L?'bad':'')}
+function new2(){ph=Math.random()<.5?0:1;pa=pb=null;tok++;sd(null);lampState(false);rings();leads();$('dg').textContent='---';msg('m2',tl=='t'?'مأخذ جديد. انقر على أحد المرابط لإدخال المفك الكاشف.':'مأخذ جديد. ضع المسبارين على مربطين.')}
+function tool2(t){tl=t;$('bt').classList.toggle('on',t=='t');$('bv').classList.toggle('on',t=='v');$('p2t').style.display=t=='t'?'':'none';$('p2v').style.display=t=='v'?'':'none';$('mm').style.display=t=='v'?'':'none';new2()}
+function click2(i){tok++;const my=tok;
+ if(tl=='t'){pa=i;rings();lampState(false);sd(i);setTimeout(()=>{if(my==tok)evalT()},600)}
+ else{if(pa===null||pb!==null){pa=i;pb=null}else pb=i;rings();leads();
+  if(pb===null){$('dg').textContent='---';msg('m2','المسبار الأحمر موضوع. ضع المسبار الأسود على مربط آخر.');return}
+  const v=pa!=pb&&((role(pa)=='L')!=(role(pb)=='L'))?220:0;$('dg').textContent=v?'220.0':'0.0';
+  msg('m2',v?'يوجد توتر 220 V بين المربطين: أحدهما هو <b>الطور</b>.':'القراءة 0 V: لا فرق في التوتر  بين هذين المربطين.',v?'bad':'ok')}}
+new2();
+
+/* ---- 3 ---- */
+let mode=1,closed=false;
+function render3(){const L='var(--live)',N='var(--neu)',D='#8a8f98',xL=110,xR=250;
+ const A=mode?(closed?L:D):L,B=mode?N:(closed?N:L);
+ const ln=(a,b,c,d,col)=>`<line x1="${a}" y1="${b}" x2="${c}" y2="${d}" stroke="${col}" stroke-width="6" stroke-linecap="round"/>`;
+ const sw=(x,top,bot,lab,lx)=>ln(x,100,x,100,top)+(closed?ln(x,100,x,150,top):ln(x,100,x+24,138,top))+`<circle cx="${x}" cy="100" r="5" fill="var(--tx)"/><circle cx="${x}" cy="150" r="5" fill="var(--tx)"/><text x="${lx}" y="130" text-anchor="middle" font-size="13" fill="var(--tx)">${lab}</text>`;
+ let t='';
+ t+=`<text x="${xL-30}" y="62" text-anchor="middle" font-size="13" fill="var(--live)">سلك الطور</text><text x="${xR+34}" y="62" text-anchor="middle" font-size="13" fill="var(--neu)">سلك الحيادي</text>`;
+ if(mode){t+=ln(xL,30,xL,100,L)+sw(xL,L,A,'قاطعة',xL-34)+ln(xL,150,xL,255,A)+ln(xR,30,xR,255,N)}
+ else{t+=ln(xL,30,xL,255,L)+ln(xR,30,xR,100,N)+sw(xR,N,B,'قاطعة',xR+34)+ln(xR,150,xR,255,B)}
+ t+=ln(xL,255,152,255,A)+ln(xR,255,208,255,B);
+ t+=`<circle cx="180" cy="255" r="28" fill="${closed?'#ffd43b':'var(--card)'}" stroke="var(--tx)" stroke-width="3"/><path d="M162 237L198 273M198 237L162 273" stroke="var(--tx)" stroke-width="2"/>`;
+ t+=`<circle cx="152" cy="255" r="6" fill="${A}"/><circle cx="208" cy="255" r="6" fill="${B}"/><text x="180" y="298" text-anchor="middle" font-size="12" fill="var(--mut)">مصباح</text>`;
+ t+=person(tc3,sk3,{cx:300,fy:300,k:.7,hx:214,hy:256});$('svg3').innerHTML=t;$('m3p').classList.toggle('on',!!mode);$('m3n').classList.toggle('on',!mode);$('sw3').textContent='القاطعة: '+(closed?'مغلقة':'مفتوحة')}
+let tc3=false,sk3=false,tt3=0;
+function touch3(){touch3_();tc3=true;sk3=!(mode&&!closed);render3();clearTimeout(tt3);tt3=setTimeout(()=>{tc3=false;sk3=false;render3()},3000)}
+function touch3_(){
+ if(!mode&&!closed)msg('m3','⚡ <b>صعقة كهربائية!</b> القاطعة مفتوحة والمصباح مطفأ، لكن حامل المصباح ما زال موصولاً بالطور عبر الفتيل. القاطعة على الحيادي لا تعزل الطور.','bad');
+ else if(!mode||closed)msg('m3','⚡ <b>خطر!</b> القاطعة مغلقة: الدارة تعمل وأحد طرفي المصباح موصول بالطور. لا تلمس حامل المصباح أبداً أثناء التشغيل.','bad');
+ else msg('m3','✅ آمن: القاطعة على الطور وهي مفتوحة، فكل نقاط المصباح معزولة عن الطور. لهذا نضع القاطعة دائماً على سلك الطور.','ok')}
+render3();
+
+/* ---- 4 ---- */
+function person(touch,shock,o){o=o||{cx:390,fy:228,k:1,hx:322,hy:118};const ax=(o.hx-o.cx)/o.k+390,ay=(o.hy-o.fy)/o.k+228;const cx=390,c=shock?'var(--live)':'var(--tx)',L=(a,b,d,e)=>`<line x1="${a}" y1="${b}" x2="${d}" y2="${e}" stroke="${c}" stroke-width="5" stroke-linecap="round"/>`;
+ let t=`<g class="${shock?'shk':''}">`+L(cx,165,cx-18,228)+L(cx,165,cx+18,228)+L(cx,108,cx,165)+(touch?L(cx,120,ax,ay):L(cx,120,cx-22,158))+L(cx,120,cx+24,156);
+ t+=`<circle cx="${cx}" cy="86" r="20" fill="${shock?'#ffd0c8':'var(--card)'}" stroke="${c}" stroke-width="3.5"/>`;
+ if(shock){const X=e=>`<path d="M${e-4} 78l8 8M${e+4} 78l-8 8" stroke="#222" stroke-width="2"/>`;t+=X(cx-8)+X(cx+8)+`<ellipse cx="${cx}" cy="96" rx="4" ry="5" fill="#222"/><path d="M${cx-10} 68l-4-12M${cx} 66v-14M${cx+10} 68l4-12" stroke="${c}" stroke-width="3" stroke-linecap="round"/>`}
+ else t+=`<circle cx="${cx-7}" cy="82" r="2.5" fill="${c}"/><circle cx="${cx+7}" cy="82" r="2.5" fill="${c}"/><path d="M${cx-8} 92Q${cx} 100 ${cx+8} 92" fill="none" stroke="${c}" stroke-width="2.5" stroke-linecap="round"/>`;
+ t+='</g>';if(shock)t+=`<text x="${cx-52}" y="140" font-size="34">⚡</text><text x="${cx+22}" y="112" font-size="30">⚡</text>`;
+ return `<g transform="translate(${o.cx},${o.fy}) scale(${o.k}) translate(-390,-228)">`+t+`<text x="${cx}" y="250" text-anchor="middle" font-size="14" font-weight="700" fill="${shock?'var(--live)':'var(--ok)'}">${shock?'مصاب بصعقة':'غير مصاب'}</text></g>`}
+function render4(){const f=$('c4f').checked,e=$('c4e').checked,p=$('c4p').checked;
+ let s=`<rect x="160" y="20" width="160" height="170" rx="12" fill="var(--bg)" stroke="${f&&!e?'var(--live)':'var(--tx)'}" stroke-width="${f&&!e?6:3}"/><text x="240" y="40" text-anchor="middle" font-size="12" fill="var(--mut)">هيكل معدني</text>`;
+ s+=`<rect x="195" y="70" width="90" height="60" rx="8" fill="var(--card)" stroke="var(--tx)" stroke-width="2"/><text x="240" y="106" text-anchor="middle" font-size="12" fill="var(--tx)">محرك</text>`;
+ s+=`<line x1="0" y1="100" x2="195" y2="100" stroke="var(--live)" stroke-width="6"/><line x1="0" y1="120" x2="195" y2="120" stroke="var(--neu)" stroke-width="6"/>`;
+ if(f)s+=`<polyline points="240,70 232,58 246,50 238,38 240,22" fill="none" stroke="#ffb300" stroke-width="3"/><text x="195" y="60" font-size="18">⚡</text>`;
+ s+=e?`<line x1="240" y1="190" x2="240" y2="228" stroke="url(#ge)" stroke-width="8"/><path d="M215 232h50M225 240h30M233 248h14" stroke="var(--tx)" stroke-width="3"/>`:`<line x1="240" y1="190" x2="240" y2="212" stroke="#8a8f98" stroke-width="6" stroke-dasharray="4 5"/><text x="240" y="232" text-anchor="middle" font-size="11" fill="var(--mut)">لا يوجد توصيل أرضي</text>`;
+ s+=person(p,p&&f&&!e);
+ $('svg4').innerHTML=s;
+ $('v4').textContent=f&&!e?'220 V':f&&e?'≈ 0 V':'0 V';
+ let m,c;
+ if(!f){m='الجهاز سليم: الهيكل معزول عن الطور. (التوصيل الأرضي تبقى مهمة تحسباً لأي عطب).';c='ok'}
+ else if(!e){m=p?'⚡ <b>خطر قاتل!</b> الهيكل تحت 220 V ولا يوجد مسلك للأرض، فيمر التيار عبر جسم الشخص إلى الأرض (أكثر من 30 mA كافٍ ليكون خطيراً).':'الهيكل تحت توتر 220 V لكنه لا يظهر شيئاً! أي شخص يلمسه سيصعق.';c='bad'}
+ else{m='✅ يمر التيار المستمر بسهولة عبر السلك الأرضي فيصبح توتر الهيكل ≈ 0 V، ويرتفع التيار فتنصهر المنصهرة أو تقطع القاطعة فيُفصل الجهاز.'+(p?' الشخص الذي يلمس الهيكل في أمان.':'');c='ok'}
+ msg('m4',m,c)}
+render4();
+
+/* ---- 5 ---- */
+const LN=(a,b,c,d,col)=>`<line x1="${a}" y1="${b}" x2="${c}" y2="${d}" stroke="${col}" stroke-width="6" stroke-linecap="round"/>`;
+const AP5=[['💡','مصباح',100],['📺','تلفاز',200],['👔','مكواة',1000],['☕','غلاية',2000],['🍕','فرن',3000]],FR=[2,5,10,16,20];
+let a5=2,r5=10,on5=false,bl5=false,tm5=0,cz5='';
+const I5=()=>AP5[a5][2]/220;
+let pu5=false;
+function build5(){$('ap5').innerHTML=AP5.map((a,i)=>`<button class="btn${i==a5?' on':''}" onclick="a5=${i};reset5()">${a[0]} ${a[1]} (${pu5?a[2]+' W':Math.round(a[2]/22)/10+' A'})</button>`).join('');
+ $('fr5').innerHTML=FR.map(r=>`<button class="btn${r==r5?' on':''}" onclick="r5=${r};reset5()">${r} A</button>`).join('');
+ $('mi5').classList.toggle('on',!pu5);$('mp5').classList.toggle('on',pu5)}
+function reset5(){on5=false;bl5=false;tm5=0;cz5='';build5();render5();status5()}
+function mode5(p){pu5=p;build5();render5();status5()}
+function run5(){if(bl5)return;on5=!on5;tm5=0;render5();status5()}
+function surge5(){if(!bl5){bl5=true;cz5='s'}render5();status5()}
+function render5(){const L='var(--live)',N='var(--neu)',D='#8a8f98',xL=110,xR=250,ok=!bl5,a=AP5[a5];
+ let t=LN(xL,20,xL,100,L)+LN(xR,20,xR,255,N)+LN(xL,150,xL,255,ok?L:D)+LN(xL,255,152,255,ok?L:D)+LN(xR,255,208,255,N);
+ t+=`<text x="${xL-30}" y="62" text-anchor="middle" font-size="13" fill="var(--live)">Ph</text><text x="${xR+34}" y="62" text-anchor="middle" font-size="13" fill="var(--neu)">N</text>`;
+ t+=`<rect x="100" y="100" width="20" height="50" rx="0" fill="var(--card)" stroke="var(--tx)" stroke-width="2.5"/>`;
+ t+=ok?`<line x1="110" y1="104" x2="110" y2="146" stroke="var(--tx)" stroke-width="2"/>`:`<line x1="110" y1="104" x2="110" y2="116" stroke="var(--tx)" stroke-width="2"/><line x1="110" y1="136" x2="110" y2="146" stroke="var(--tx)" stroke-width="2"/><text x="110" y="132" text-anchor="middle" font-size="16">💥</text>`;
+ t+=`<text x="${xL-34}" y="130" text-anchor="middle" font-size="13" fill="var(--tx)">${r5} A</text>`;
+ if(cz5=='s')t+=`<text x="180" y="110" text-anchor="middle" font-size="26">⚡</text>`;
+ t+=`<circle cx="180" cy="255" r="28" fill="${on5&&ok?'#ffd43b':'var(--card)'}" stroke="var(--tx)" stroke-width="3"/><text x="180" y="265" text-anchor="middle" font-size="26">${a[0]}</text><text x="180" y="300" text-anchor="middle" font-size="12" fill="var(--mut)">${a[1]}</text>`;
+ $('svg5').innerHTML=t;$('rb5').textContent=on5?'⏹ إيقاف الجهاز':'▶ تشغيل الجهاز';
+ $('inf5').textContent=pu5?'P = '+a[2]+' W ، U = 220 V':'I = '+I5().toFixed(1)+' A'}
+function status5(){const I=I5(),best=FR.find(f=>f>=I),iT=pu5?'':' ('+I.toFixed(1)+' A)';
+ if(bl5)msg('m5',cz5=='s'?'⚡ ارتفع التيار فجأة فانصهر سلك المنصهرة وفُتحت الدارة فوراً. بهذا حمت الأسلاك والجهاز. استبدل المنصهرة وأعد التشغيل.':'💥 انصهرت المنصهرة: عيارها ('+r5+' A) أصغر من شدة تيار الجهاز'+iT+'. هذه المنصهرة غير مناسبة.',cz5=='s'?'ok':'bad');
+ else if(!on5)msg('m5','اختر جهازاً ومنصهرة ثم اضغط تشغيل. يمكنك أيضاً تجربة الارتفاع المفاجئ في التيار.');
+ else if(r5>16)msg('m5','الجهاز يشتغل، لكن عيار '+r5+' A أكبر مما يتحمله سلك المنزل (16 A): لا تحمي الأسلاك. منصهرة غير مناسبة.','warn');
+ else if(r5==best)msg('m5','✅ منصهرة مناسبة: عيارها ('+r5+' A) أكبر من شدة التيار'+iT+' وهو أقرب عيار ممكن.','ok');
+ else msg('m5','الجهاز يشتغل، لكن المنصهرة ('+r5+' A) أكبر من اللازم فلا تحمي جيداً. الأنسب هو '+best+' A.','warn')}
+setInterval(()=>{if(on5&&!bl5){const I=I5();if(I>r5){tm5+=.1*(I/r5)*(I/r5);if(tm5>=1.5){bl5=true;cz5='w';render5();status5()}}else tm5=0}},100);
+reset5();
+
+/* ---- 6 ---- */
+const ln4=(a,b,c,d,col)=>`<line x1="${a}" y1="${b}" x2="${c}" y2="${d}" stroke="${col}" stroke-width="4" stroke-linecap="round"/>`;
+function brk(yP,yN,ok){const x1=36,x2=66,tx='var(--tx)';
+ let t=`<rect x="20" y="${yP-16}" width="60" height="${yN-yP+32}" rx="3" fill="none" stroke="${tx}" stroke-width="2"/>`;
+ [yP,yN].forEach(y=>{t+=(ok?`<line x1="${x1}" y1="${y}" x2="${x2}" y2="${y}"`:`<line x1="${x1}" y1="${y}" x2="${x2-4}" y2="${y-18}"`)+` stroke="${tx}" stroke-width="2.5"/><circle cx="${x1}" cy="${y}" r="4" fill="${tx}"/><circle cx="${x2}" cy="${y}" r="4" fill="${tx}"/>`});
+ return t+`<text x="11" y="${yP-7}" text-anchor="middle" font-size="12" font-weight="700" fill="${tx}">Ph</text><text x="9" y="${yN-7}" text-anchor="middle" font-size="12" font-weight="700" fill="${tx}">N</text>`}
+const sock=(x,y,fill)=>`<circle cx="${x}" cy="${y+26}" r="24" fill="${fill||'var(--card)'}" stroke="var(--tx)" stroke-width="2.5"/><circle cx="${x-10}" cy="${y+26}" r="4" fill="none" stroke="var(--tx)" stroke-width="2"/><circle cx="${x+10}" cy="${y+26}" r="4" fill="none" stroke="var(--tx)" stroke-width="2"/>`;
+const SETS=[[['👔','مكواة',1100],['☕','غلاية',2200],['🍕','فرن',3300]],[['💡','مصباح',220],['📺','تلفاز',440],['❄️','ثلاجة',660]],[['🌀','مروحة',110],['💻','حاسوب',330],['🔥','مدفأة',1650]],[['🧺','غسالة',4400],['','جهاز تلحيم',3850],['💨','مجفف شعر',1210]],[['🌬️','مكيف',2640],['🚰','مضخة',1320],['🧹','مكنسة',1760]]],BR=[10,20,30,40],U=220;let si=0,AP6=SETS[0];
+function chg6(){si=(si+1)%SETS.length;AP6=SETS[si];on6=[0,0,0];tr6=false;render6()}
+let on6=[0,0,0],br6=20,tr6=false,pu=false;
+const I6=i=>AP6[i][2]/U,T6=()=>on6.reduce((s,v,i)=>s+v*I6(i),0),f1=x=>String(Math.round(x*10)/10);
+function chk6(){if(T6()>br6+1e-9)tr6=true}
+function tog6(i){on6[i]=on6[i]?0:1;if(!tr6)chk6();render6()}
+function setBr6(b){br6=b;tr6=false;chk6();render6()}
+function rearm6(){tr6=false;chk6();render6()}
+function render6(){const L='var(--live)',N='var(--neu)',D='#8a8f98',tx='var(--tx)',ok=!tr6,yP=24,yN=56,X=[150,280,410];
+ let t=ln4(0,yP,36,yP,L)+ln4(0,yN,36,yN,N)+ln4(66,yP,478,yP,ok?L:D)+ln4(66,yN,478,yN,ok?N:D)+brk(yP,yN,ok);
+ t+=`<text x="50" y="92" text-anchor="middle" font-size="12" fill="${tx}">قاطع تفاضلي</text><text x="50" y="108" text-anchor="middle" font-size="12" fill="${tx}">${br6} A</text>`;
+ X.forEach((x,i)=>{const on=on6[i]&&ok,tw=on?'#1b2330':tx,a=AP6[i];
+  t+=ln4(x+14,yP,x+14,198,ok?L:D)+ln4(x-14,yN,x-14,198,ok?N:D)+`<circle cx="${x+14}" cy="${yP}" r="4.5" fill="${tx}"/><circle cx="${x-14}" cy="${yN}" r="4.5" fill="${tx}"/>`;
+  t+=`<g class="h" onclick="tog6(${i})">`+sock(x,190,on?'#ffe58a':null)+(on?`<line x1="${x+10}" y1="220" x2="${x+10}" y2="262" stroke="${L}" stroke-width="3.5"/><line x1="${x-10}" y1="220" x2="${x-10}" y2="262" stroke="${N}" stroke-width="3.5"/>`:'')
+   +`<rect x="${x-54}" y="262" width="108" height="64" rx="10" fill="${on?'#ffe58a':'var(--card)'}" stroke="${tx}" stroke-width="2.5"/><text x="${x}" y="282" text-anchor="middle" font-size="13" font-weight="700" fill="${tw}">${a[0]} ${a[1]}</text>`
+   +(pu?`<text x="${x}" y="300" text-anchor="middle" font-size="13" fill="${tw}">P = ${a[2]} W</text><text x="${x}" y="317" text-anchor="middle" font-size="13" fill="${tw}">U = ${U} V</text>`:`<text x="${x}" y="305" text-anchor="middle" font-size="15" fill="${tw}">I = ${f1(I6(i))} A</text>`)+'</g>'});
+ $('svg6').innerHTML=t;
+ $('ap6').innerHTML=AP6.map((a,i)=>`<button class="btn${on6[i]?' on':''}" onclick="tog6(${i})">${a[0]} ${a[1]}</button>`).join('');
+ $('br6').innerHTML=BR.map(b=>`<button class="btn${b==br6?' on':''}" onclick="setBr6(${b})">${b} A</button>`).join('');
+ $('cb6').textContent='🔄 تغيير الأجهزة ('+(si+1)+'/'+SETS.length+')';$('mi6').classList.toggle('on',!pu);$('mp6').classList.toggle('on',pu);
+ const T=T6();
+ $('t6').textContent=pu?'P = '+Math.round(T*U)+' W ، U = '+U+' V':'I = '+f1(T)+' A';
+ $('mw6').style.display=pu?'none':'';$('mt6').style.width=Math.min(T/45,1)*100+'%';$('mt6').style.background=T>br6?'var(--live)':'var(--ok)';$('mk6').style.right=(br6/45*100)+'%';
+ if(tr6)msg('m6','⚡ فصل القاطع التفاضلي: مجموع شدات تيار الأجهزة أكبر من الشدة التي يتحملها. أطفئ جهازاً (أو أكثر) ثم اضغط «تمرير التيار ».','bad');
+ else if(!T)msg('m6','شغّل الأجهزة واحداً تلو الآخر. في التفرع تُجمع الشدات: I = I₁ + I₂ + I₃.');
+ else msg('m6','✅ الدارة تعمل: مجموع الشدات لا يتجاوز الشدة التي يتحملها القاطع.','ok')}
+render6();
+
+/* ---- 7 ---- */
+let sh7=false,tr7=false,tm7=0;
+function trip7(d){clearTimeout(tm7);tm7=setTimeout(()=>{if(sh7){tr7=true;render7()}},d)}
+function short7(){sh7=!sh7;if(sh7)trip7(700);render7()}
+function rearm7(){tr7=false;if(sh7)trip7(500);render7()}
+function render7(){const L='var(--live)',N='var(--neu)',D='#8a8f98',tx='var(--tx)',ok=!tr7,yP=40,yN=100;
+ let t=ln4(0,yP,36,yP,L)+ln4(0,yN,36,yN,N)+ln4(66,yP,478,yP,ok?L:D)+ln4(66,yN,478,yN,ok?N:D)+brk(yP,yN,ok);
+ t+=`<text x="50" y="140" text-anchor="middle" font-size="12" fill="${tx}">قاطع تفاضلي</text>`;
+ t+=ln4(214,yP,214,180,ok?L:D)+ln4(186,yN,186,180,ok?N:D)+`<circle cx="214" cy="${yP}" r="4.5" fill="${tx}"/><circle cx="186" cy="${yN}" r="4.5" fill="${tx}"/>`+sock(200,170)+`<text x="200" y="240" text-anchor="middle" font-size="13" fill="${tx}">مأخذ</text>`;
+ if(sh7){t+=`<line x1="380" y1="${yP}" x2="380" y2="${yN}" stroke="#f59f00" stroke-width="6" stroke-linecap="round"/><circle cx="380" cy="${yP}" r="5" fill="${tx}"/><circle cx="380" cy="${yN}" r="5" fill="${tx}"/><text x="412" y="78" text-anchor="middle" font-size="26">${ok?'⚡':''}</text><text x="380" y="130" text-anchor="middle" font-size="12" fill="${tx}">خط بين الطور والحيادي</text>`}
+ $('svg7').innerHTML=t;$('sh7').textContent=sh7?'✂ إزالة الاستقصار':'⚡ استقصار الدارة';$('sh7').classList.toggle('on',!sh7);
+ if(sh7&&!tr7)msg('m7','⚡ استقصار! الطور والحيادي موصولان مباشرة بدون جهاز بينهما: شدة التيار ترتفع بشكل هائل.','bad');
+ else if(sh7)msg('m7','✅ فتح القاطع التفاضلي الدارة فوراً وحمى الأسلاك من الحريق. أزل الاستقصار ثم اضغط «إعادة».','ok');
+ else if(tr7)msg('m7','أُزيل الاستقصار. القاطع ما زال مفتوحاً: اضغط «إعادة» لتشغيل الدارة.','warn');
+ else msg('m7','الدارة سليمة. اضغط «استقصار الدارة» لربط خط بين الطور والحيادي.')}
+render7();
+
+/* ---- reset ---- */
+const RS={
+1:()=>{rev=false;paint1();['L','N','E'].forEach(x=>['','b'].forEach(sf=>{const e=$('h1'+x+sf);if(e)e.setAttribute('stroke-width',1.5)}));msg('i1','اختر مربطاً من أحد المأخذين.')},
+2:()=>{$('fg').checked=false;$('fgr').style.opacity=0;tool2('t')},
+3:()=>{clearTimeout(tt3);mode=1;closed=false;tc3=sk3=false;render3();msg('m3','')},
+4:()=>{['c4f','c4e','c4p'].forEach(i=>$(i).checked=false);render4()},
+5:()=>{a5=2;r5=10;pu5=false;reset5()}};
+for(const k in RS){const b=document.createElement('button');b.className='btn rs';b.textContent='↺ إعادة';b.onclick=RS[k];$('s'+k).querySelector('h2').appendChild(b)}
+
+/* ---- blur ---- */
+function blurNotes(){const b=document.body.classList.toggle('bl');$('blb').classList.toggle('on',b);document.querySelectorAll('.msg.show').forEach(m=>m.classList.remove('show'))}
+document.addEventListener('click',e=>{const m=e.target.closest('.msg');if(m&&m.id!='i1'&&document.body.classList.contains('bl'))m.classList.toggle('show')});
+</script></body></html>
